@@ -1,0 +1,65 @@
+<html>
+  <body>
+    <section class="exercises">
+      <h1>Test</h1>
+      <div id="test" class="test"></div>
+
+    </section>
+    <button onclick="addNewExercise()">Add New Exercise</button>
+
+  </body>
+  <script>
+    const exerciseIds = [];
+    let index = 0;
+
+    const addNewExercise = () => {
+      const newId = getNewId();
+
+      const template = document.createElement('template');
+      const html = 
+        `<div id="test${newId}" class="eTest">
+          <h1>TEST ${newId}</h1>
+          <button id="btn${newId}" onclick="printSomething(${newId})">${newId}</button>
+        </div>`;
+      template.innerHTML = html;
+
+      let clone = template.content.cloneNode(true);
+
+      document.getElementById('test').appendChild(template.content);
+      exerciseIds.push(newId);
+    }
+
+    const printSomething = (value) => {
+      console.log('something', value)
+    }
+
+    const getNewId = () => {
+      return exerciseIds.length > 0 
+        ? exerciseIds[exerciseIds.length - 1] + 1 // last element will always have highest id
+        : 0;
+    }
+    
+  </script>
+  <style>
+
+      .exercises {
+
+        .test {
+          display: flex;
+          width: 100%;
+          flex-wrap: wrap;
+
+
+        }
+      }
+
+
+
+
+    .eTest {
+      color: red;
+      display: flex;
+      width: 50%;
+    }
+  </style>
+</html>
